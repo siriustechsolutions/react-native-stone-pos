@@ -8,6 +8,14 @@ Lib React Native e Expo para expor o SDK das maquininhas de cartão da Stone
 npm install react-native-stone-pos
 ```
 
+Instale a lib react native config
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+crie um arquivo .env na raiz do seu projeto e add STONE_TOKEN=
+
+talvez tenha que reduzir sua targetSdkVersion para a 34
+talves adicione android.enableJetifier=true no seu gradle.properties
+no seu AndroidManisfet.xml adicione, android:allowBackup="true". Na pasta exemplo tem outras configuraç~eos que vc pode precisar
+
 ## Usage
 
 
