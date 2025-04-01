@@ -1,4 +1,4 @@
-# react-native-stone-pos
+# react-native-stone-pos TODO - EM DESENVOLVIMENTO
 
 Lib React Native e Expo para expor o SDK das maquininhas de cartão da Stone
 
