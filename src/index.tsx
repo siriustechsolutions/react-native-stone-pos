@@ -262,4 +262,12 @@ export const StonePosSDK = new (class {
 
     return StonePos.mifareWriteBlock(keyType, sector, block, data, key);
   }
+
+  addListener(eventName: string): void {
+    StonePos.addListener(eventName);
+  }
+
+  removeListeners(count: number): void {
+    StonePos.removeListeners(count);
+  }
 })();

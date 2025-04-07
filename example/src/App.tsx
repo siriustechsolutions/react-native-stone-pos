@@ -1,17 +1,16 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import Trasaction from './transaction';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Result</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Trasaction />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  scrollContainer: {
+    flexGrow: 1,
   },
 });

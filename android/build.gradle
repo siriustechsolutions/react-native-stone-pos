@@ -86,6 +86,9 @@ def stone_sdk_token = project.env.get("STONE_TOKEN")
 def kotlin_version = getExtOrDefault("kotlinVersion")
 def stone_sdk_version = '4.10.2'
 
+if (stone_sdk_token == null || stone_sdk_token.isEmpty()) {
+    throw new RuntimeException('You need to set the STONE_TOKEN in your .env')
+}
 
 repositories {
   maven { url "https://packagecloud.io/priv/${stone_sdk_token}/stone/pos-android/maven2" }
@@ -94,7 +97,6 @@ repositories {
   mavenCentral()
   google()
 }
-
 
 dependencies {
   implementation "com.facebook.react:react-android"
