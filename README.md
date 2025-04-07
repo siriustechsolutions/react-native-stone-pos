@@ -3,7 +3,7 @@
 
 
 
-# react-native-stone-pos-sdk
+# react-native-stone-smart-pos
 
 ## Modulo React Native e Expo com implementação do SDK Stone para terminais smart POS. Para criação de aplicativos para maquininha de cartão de crédito da Stone.
 
@@ -25,7 +25,7 @@ https://github.com/EightSystems/react-native-stone-pos
 ## Instalação
 
 ```sh
-yarn add react-native-stone-pos-sdk
+yarn add react-native-stone-smart-pos
 ```
 
 OBS:
@@ -50,7 +50,7 @@ STONE_QRCODE_PROVIDERID=
 
 
 ```js
-import { StonePosSDK } from 'react-native-stone-pos-sdk';
+import { StonePosSDK } from 'react-native-stone-smart-pos';
 
 const result = await StonePosSDK.initSDK(
   'APP_NAME',

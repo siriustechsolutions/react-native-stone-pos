@@ -10075,9 +10075,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-stone-pos-sdk@workspace:.":
+"react-native-stone-smart-pos@workspace:.":
   version: 0.0.0-use.local
-  resolution: "react-native-stone-pos-sdk@workspace:."
+  resolution: "react-native-stone-smart-pos@workspace:."
   dependencies:
     "@eslint/compat": ^1.2.7
     "@eslint/eslintrc": ^3.3.0

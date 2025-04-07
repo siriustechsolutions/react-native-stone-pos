@@ -11,7 +11,7 @@ import { useState, useRef } from 'react';
 import {
   StonePosSDK,
   type StoneTransactionResponse,
-} from 'react-native-stone-pos-sdk';
+} from 'react-native-stone-smart-pos';
 
 const Trasaction = () => {
   const [isActivated, setIsActivated] = useState(false);
