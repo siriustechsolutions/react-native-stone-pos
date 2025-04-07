@@ -1,41 +1,125 @@
-# react-native-stone-pos TODO - EM DESENVOLVIMENTO
 
-Lib React Native e Expo para expor o SDK das maquininhas de cartão da Stone
 
-## Installation
+
+
+
+# react-native-stone-pos
+
+## Modulo React Native e Expo com implementação do SDK Stone para terminais smart POS. Para criação de aplicativos para maquininha de cartão de crédito da Stone.
+
+Esta lib pode ser usado em React Native e Expo, está com a versão mais atual do SDK da Stone.
+
+Para mais informações sobre o SDK: https://sdkandroid.stone.com.br/docs/o-que-e-a-sdk-android
+
+OBS> Os fluxos básicos estão funcionando porém ainda existem algumas implementações a serem feitas, você pode implementar e abrir um PR para colaborar com este projeto ou nos solicitar via issues do github.
+
+Nossa ideia é constuir um modelo básico multiadquirente para facilitar a implementação em terminais smart POS.
+Além de vários adquirentes e telas prontas o projeto conta com intefaces para impressoras térmicas, NFC, QrCode e muito mais.
+Este modulo estará disponível no repo: https://github.com/siriustechsolutions/react-native-pos-multi-acquirer-template
+
+## Agradecimento
+
+Este módulo se baseia no projeto de EightSystems, disponível em:
+https://github.com/EightSystems/react-native-stone-pos
+
+## Instalação
 
 ```sh
-npm install react-native-stone-pos
+yarn add react-native-stone-pos
 ```
 
-Instale a lib react native config
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-crie um arquivo .env na raiz do seu projeto e add STONE_TOKEN=
+OBS:
+Talvez tenha que reduzir sua targetSdkVersion para a 34.
+Talves precise adicionar android.enableJetifier=true no seu gradle.properties.
+Por fim pode precisar adicionar no arquivo AndroidManisfet.xml o parametro android:allowBackup="true". 
+Na pasta exemplo tem essas e outras configurações que vc pode precisar.
 
-talvez tenha que reduzir sua targetSdkVersion para a 34
-talves adicione android.enableJetifier=true no seu gradle.properties
-no seu AndroidManisfet.xml adicione, android:allowBackup="true". Na pasta exemplo tem outras configuraç~eos que vc pode precisar
 
-## Usage
+## Exemplo de uso
+
+Exemplo de uso mais extensivo você pode encontrar na pasta [example] presente na raiz deste projeto
+
+OS dados de credenciais seram fornecidos pela Stone durante seu processo de se tornar Stone Partners
+No seu projeto será nescessário utilizar a lib [react-native-config](https://www.npmjs.com/package/react-native-config)
+Adicione o token de acesso ao SDK da Stone na variável: STONE_QRCODE_AUTHORIZATION=
+
+Você pode passar as demais credenciais por parametro ou simplismente adicionar ao seu arquivo .env e adicionar as seguintes variáveis de ambiente.
+STONE_TOKEN=
+STONE_APP_NAME=
+STONE_QRCODE_PROVIDERID=
 
 
 ```js
-import { multiply } from 'react-native-stone-pos';
+import { StonePosSDK } from 'react-native-stone-pos';
 
-// ...
-
-const result = multiply(3, 7);
+const result = await StonePosSDK.initSDK(
+  'APP_NAME',
+  'QR_CODE_PROVIDER_KEY',
+  'QR_CODE_PROVIDER_AUTHORIZATION'
+);
 ```
 
+```js
+const transaction = await StonePosSDK.makeTransaction({
+  typeOfTransaction: 'CREDIT',
+  installmentCount: 1,
+  installmentHasInterest: false,
+  amountInCents: 100,
+  initiatorTransactionKey: `TRANSACTION_${Date.now()}`,
+  capture: true,
+});
+```
 
-## Contributing
+## Eventos durantes uma transação
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+Acompanhe os status de atualização de uma tranção com uso de Listener, a cada atualização a adquirente notifica o status em tempo real
+No código de exemplo vc pode obsevar melhor essa implementação.
+
+```js
+  /** Eventos de status da transação */
+  useEventEmitter((event: any) => {
+    console.info('MAKE_TRANSACTION_PROGRESS', event);
+
+    if (event.status === 'TRANSACTION_WAITING_CARD') {
+      // Quando solicita para aproximar o cartão
+    }
+
+    if (event.status === 'TRANSACTION_SENDING') {
+      // Status da transação
+    }
+
+    if (event.status === 'TRANSACTION_WAITING_QRCODE_SCAN') {
+      // Quando gera o QRCode
+    }
+  });
+```
+
+## Nesta versão a impressão será feita apenas através de uma string HTML, em uma futura terá impressão por uma imagem
+
+# Configuração no Expo - (APENAS EXPO)
+
+Trabalhar com terminais smart POS demandam na maioria das vezes o manuseio de configuração de baixo nível no Android, isso inviabiliza o uso de desenvolvimento com Expo GO.
+Portanto, você precisa usar expo-dev-client para expor a pasta android do seu projeto Expo.
+
+TODO - Podemos melhorar isto no futuro:
+Adicione o repo ao arquivo /android/build.gradle:
+
+```xml
+allprojects {
+    repositories {
+        maven { url "https://packagecloud.io/priv/SEU_STONE_CODE/stone/pos-android/maven2" }
+        maven { url "https://packagecloud.io/priv/SEU_STONE_CODE/stone/pos-android-internal/maven2" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+   }
+}
+```
+
+## Dúvidas
+
+Estamos a disposição para construir juntos ferramentas para soluções financeiras e facilitar a vida dos devs Brasileiros
+
+Saiba mais sobre nós em [Sirius Tech](https://siriustechsolucoes.com)
 
 ## License
 
 MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import StonePos, { type TransactionRequest } from './NativeStonePos';
 
 export type { TransactionRequest };
@@ -120,11 +121,15 @@ export interface StoneInitSDKRequest {
 }
 
 export const StonePosSDK = new (class {
-  initSDK(stoneInitSDKRequest: StoneInitSDKRequest): Promise<boolean> {
+  initSDK(stoneInitSDKRequest?: StoneInitSDKRequest): Promise<boolean> {
     return StonePos.initSDK(
-      stoneInitSDKRequest.appName,
-      stoneInitSDKRequest.qrCodeProviderKey,
-      stoneInitSDKRequest.qrCodeProviderAuthorization
+      stoneInitSDKRequest?.appName || Config.APP_NAME || 'StonePos Example',
+      stoneInitSDKRequest?.qrCodeProviderKey ||
+        Config.QR_CODE_PROVIDER_KEY ||
+        '',
+      stoneInitSDKRequest?.qrCodeProviderAuthorization ||
+        Config.QR_CODE_PROVIDER_AUTHORIZATION ||
+        ''
     );
   }
 

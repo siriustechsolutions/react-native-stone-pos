@@ -12,7 +12,6 @@ import {
   StonePosSDK,
   type StoneTransactionResponse,
 } from 'react-native-stone-pos';
-import Config from 'react-native-config';
 
 const Trasaction = () => {
   const [isActivated, setIsActivated] = useState(false);
@@ -196,11 +195,7 @@ const Trasaction = () => {
   };
 
   const activateTerminal = async () => {
-    const result = await StonePosSDK.initSDK({
-      appName: Config.APP_NAME || 'StonePos Example',
-      qrCodeProviderKey: Config.QR_CODE_PROVIDER_KEY || '',
-      qrCodeProviderAuthorization: Config.QR_CODE_PROVIDER_AUTHORIZATION || '',
-    });
+    const result = await StonePosSDK.initSDK();
     setIsActivated(result);
   };
 
