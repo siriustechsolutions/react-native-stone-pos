@@ -1,6 +1,6 @@
 {
   "name": "react-native-stone-smart-pos",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lib React Native e Expo para expor o SDK das maquininhas de cartão da Stone",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
