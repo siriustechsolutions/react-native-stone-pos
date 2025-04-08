@@ -41,12 +41,13 @@ Exemplo de uso mais extensivo você pode encontrar na pasta [example] presente n
 
 OS dados de credenciais seram fornecidos pela Stone durante seu processo de se tornar Stone Partners
 No seu projeto será nescessário utilizar a lib [react-native-config](https://www.npmjs.com/package/react-native-config)
-Adicione o token de acesso ao SDK da Stone na variável: STONE_QRCODE_AUTHORIZATION=
+Adicione o token de acesso ao SDK da Stone na variável: STONE_TOKEN=
 
 Você pode passar as demais credenciais por parametro ou simplismente adicionar ao seu arquivo .env e adicionar as seguintes variáveis de ambiente.
 STONE_TOKEN=
 STONE_APP_NAME=
-STONE_QRCODE_PROVIDERID=
+STONE_QR_CODE_PROVIDER_ID=
+STONE_QR_CODE_AUTHORIZATION=
 
 
 ```js
@@ -54,7 +55,7 @@ import { StonePosSDK } from 'react-native-stone-smart-pos';
 
 const result = await StonePosSDK.initSDK(
   'APP_NAME',
-  'QR_CODE_PROVIDER_KEY',
+  'QR_CODE_PROVIDER_ID',
   'QR_CODE_PROVIDER_AUTHORIZATION'
 );
 ```

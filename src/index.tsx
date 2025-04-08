@@ -123,12 +123,14 @@ export interface StoneInitSDKRequest {
 export const StonePosSDK = new (class {
   initSDK(stoneInitSDKRequest?: StoneInitSDKRequest): Promise<boolean> {
     return StonePos.initSDK(
-      stoneInitSDKRequest?.appName || Config.APP_NAME || 'StonePos Example',
+      stoneInitSDKRequest?.appName ||
+        Config.STONE_APP_NAME ||
+        'StonePos Example',
       stoneInitSDKRequest?.qrCodeProviderKey ||
-        Config.QR_CODE_PROVIDER_KEY ||
+        Config.STONE_QR_CODE_PROVIDER_ID ||
         '',
       stoneInitSDKRequest?.qrCodeProviderAuthorization ||
-        Config.QR_CODE_PROVIDER_AUTHORIZATION ||
+        Config.STONE_QR_CODE_AUTHORIZATION ||
         ''
     );
   }
