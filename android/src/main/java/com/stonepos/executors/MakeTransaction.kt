@@ -1,6 +1,8 @@
 package com.stonepos.executors
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.util.Base64
 import br.com.stone.posandroid.providers.PosTransactionProvider
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -20,6 +22,7 @@ import stone.providers.BaseTransactionProvider
 import stone.providers.TransactionProvider
 import stone.utils.PinpadObject
 import stone.utils.Stone
+import java.io.ByteArrayOutputStream
 
 class MakeTransaction(
   reactApplicationContext: ReactApplicationContext,
@@ -121,6 +124,15 @@ class MakeTransaction(
         }
 
         override fun onStatusChanged(action: Action?) {
+          val qrCodeBase64 = if (action == Action.TRANSACTION_WAITING_QRCODE_SCAN && transactionObject.qrCode != null) {
+            val bitmap = transactionObject.qrCode
+            val outputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+          } else {
+            null
+          }
+
           reactApplicationContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
             .emit(
@@ -130,7 +142,7 @@ class MakeTransaction(
                 "status" to action?.name,
                 "transactionStatus" to transactionProvider.transactionStatus.name,
                 "messageFromAuthorize" to transactionProvider.messageFromAuthorize,
-                "qrCode" to if (action == Action.TRANSACTION_WAITING_QRCODE_SCAN) transactionObject.qrCode else null
+                "qrCode" to qrCodeBase64
               )
             )
         }
