@@ -40,7 +40,9 @@ Na pasta exemplo tem essas e outras configurações que vc pode precisar.
 Exemplo de uso mais extensivo você pode encontrar na pasta [example] presente na raiz deste projeto
 
 OS dados de credenciais seram fornecidos pela Stone durante seu processo de se tornar Stone Partners
-No seu projeto será nescessário utilizar a lib [react-native-config](https://www.npmjs.com/package/react-native-config)
+
+No seu projeto será nescessário utilizar a lib [react-native-config](https://www.npmjs.com/package/react-native-config) 
+
 Adicione o token de acesso ao SDK da Stone na variável: STONE_TOKEN=
 
 Você pode passar as demais credenciais por parametro ou simplismente adicionar ao seu arquivo .env e adicionar as seguintes variáveis de ambiente.
@@ -49,6 +51,10 @@ STONE_APP_NAME=
 STONE_QR_CODE_PROVIDER_ID=
 STONE_QR_CODE_AUTHORIZATION=
 
+
+##EXPO: 
+Em projeto EXPO, não é nescessário  adicionar a dependencia react-native-config, poise será nescessário adicionar manualmente a referência de repositorio, juntamente com seu Token
+Você poderá passar as demais variáveis de ambiente, para inicialização do SDK via process.env ou passar direto na chamada da função
 
 ```js
 import { StonePosSDK } from 'react-native-stone-smart-pos';

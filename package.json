@@ -90,8 +90,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
-    "react-native-config": "*"
+    "react-native": "*"
   },
   "workspaces": [
     "example"
