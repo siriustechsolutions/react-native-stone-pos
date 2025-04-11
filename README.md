@@ -53,8 +53,8 @@ STONE_QR_CODE_AUTHORIZATION=
 
 
 ##EXPO: 
-Em projeto EXPO, não é nescessário  adicionar a dependencia react-native-config, poise será nescessário adicionar manualmente a referência de repositorio, juntamente com seu Token
-Você poderá passar as demais variáveis de ambiente, para inicialização do SDK via process.env ou passar direto na chamada da função
+Você poderá passar as variáveis de ambiente, para inicialização do SDK via process.env ou passar direto na chamada da função
+Lembrando que para Expo o react-native-config não vai funcionar, abaixo você verá como implementar o repositories
 
 ```js
 import { StonePosSDK } from 'react-native-stone-smart-pos';
