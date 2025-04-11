@@ -124,12 +124,18 @@ export const StonePosSDK = new (class {
   initSDK(stoneInitSDKRequest?: StoneInitSDKRequest): Promise<boolean> {
     return StonePos.initSDK(
       stoneInitSDKRequest?.appName ||
+        process.env.STONE_APP_NAME ||
+        process.env.EXPO_PUBLIC_STONE_APP_NAME ||
         Config.STONE_APP_NAME ||
         'StonePos Example',
       stoneInitSDKRequest?.qrCodeProviderKey ||
         Config.STONE_QR_CODE_PROVIDER_ID ||
+        process.env.STONE_QR_CODE_PROVIDER_ID ||
+        process.env.EXPO_PUBLIC_STONE_QR_CODE_PROVIDER_ID ||
         '',
       stoneInitSDKRequest?.qrCodeProviderAuthorization ||
+        process.env.STONE_QR_CODE_AUTHORIZATION ||
+        process.env.EXPO_PUBLIC_STONE_QR_CODE_AUTHORIZATION ||
         Config.STONE_QR_CODE_AUTHORIZATION ||
         ''
     );
